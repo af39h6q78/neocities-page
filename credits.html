@@ -5,172 +5,41 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Windows XP Window</title>
     
-    <!-- Windows 98/XP styling from 98.css -->
-    <style>
-        @font-face {
-            font-family: "Pixelated MS Sans Serif";
-            src: url("https://files.catbox.moe/1za99g.woff") format("woff");
-            src: url("https://files.catbox.moe/8fwbkl.woff2") format("woff2");
-            font-weight: normal;
-            font-style: normal;
-        }
-
-        @font-face {
-            font-family: "Pixelated MS Sans Serif";
-            src: url("https://files.catbox.moe/z7csle.woff") format("woff");
-            src: url("https://files.catbox.moe/moqhx6.woff2") format("woff2");
-            font-weight: bold;
-            font-style: normal;
-        }
-
-        body {
-            margin: 0;
-            padding: 0;
-            background: transparent;
-            font-family: "Pixelated MS Sans Serif", Arial;
-            -webkit-font-smoothing: none;
-            font-size: 11px;
-            width: 100vw;
-            height: 100vh;
-        }
-
-        .window {
-            box-shadow: inset -1px -1px #0a0a0a,
-                inset 1px 1px #dfdfdf, inset -2px -2px #808080,
-                inset 2px 2px #ffffff;
-            background: #c0c0c0;
-            padding: 3px;
-            width: calc(100% - 6px);
-            height: calc(100% - 6px);
-            display: block;
-            box-sizing: border-box;
-        }
-
-        .title-bar {
-            background: linear-gradient(90deg, blue, rgb(52, 50, 185), rgb(66, 112, 172));
-            padding: 3px 2px 3px 3px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .title-bar-text {
-            font-weight: bold;
-            color: white;
-            letter-spacing: 0;
-            margin-right: 24px;
-            display: flex;
-            align-items: center;
-        }
-
-        .title-bar-icon {
-            height: 14px;
-            width: 14px;
-            margin-right: 4px;
-        }
-
-        .title-bar-controls {
-            display: flex;
-        }
-
-        .title-bar-controls button {
-            border: none;
-            border-radius: 0;
-            box-sizing: border-box;
-            color: transparent;
-            min-height: 14px;
-            min-width: 16px;
-            padding: 0;
-            text-shadow: 0 0 #222;
-            background: silver;
-            box-shadow: inset -1px -1px #0a0a0a, inset 1px 1px #fff, inset -2px -2px grey, inset 2px 2px #dfdfdf;
-        }
-
-        .title-bar-controls button:not(:disabled):active {
-            box-shadow: inset -1px -1px #fff, inset 1px 1px #0a0a0a, inset -2px -2px #dfdfdf, inset 2px 2px grey;
-        }
-
-        .title-bar-controls button:focus {
-            outline: none;
-        }
-
-        .title-bar-controls button[aria-label=Minimize] {
-            background-image: url("https://raw.githubusercontent.com/jdan/98.css/main/icon/minimize.svg");
-            background-position: bottom 3px left 4px;
-            background-repeat: no-repeat;
-        }
-
-        .title-bar-controls button[aria-label=Maximize] {
-            background-image: url("https://raw.githubusercontent.com/jdan/98.css/4a2282dd9170cabf730fb5803d1153d86b2e94e3/icon/maximize.svg");
-            background-position: top 2px left 3px;
-            background-repeat: no-repeat;
-        }
-
-        .title-bar-controls button[aria-label=Close] {
-            background-image: url("https://raw.githubusercontent.com/jdan/98.css/main/icon/close.svg");
-            background-position: top 3px left 4px;
-            background-repeat: no-repeat;
-            margin-left: 2px;
-        }
-
-        .window-body {
-            margin: 0px;
-            padding: 8px;
-            min-height: 200px;
-        }
-
-        .content-area {
-            background: white;
-            border: 2px inset #c0c0c0;
-            padding: 10px;
-            margin-bottom: 10px;
-        }
-
-        button.win-button {
-            background: silver;
-            box-shadow: inset -1px -1px #0a0a0a, inset 1px 1px #fff, inset -2px -2px grey, inset 2px 2px #dfdfdf;
-            border: none;
-            border-radius: 0;
-            box-sizing: border-box;
-            min-height: 23px;
-            min-width: 75px;
-            padding: 0 12px;
-            font-family: "Pixelated MS Sans Serif", Arial;
-            font-size: 11px;
-            margin-right: 8px;
-        }
-
-        button.win-button:active {
-            box-shadow: inset -1px -1px #fff, inset 1px 1px #0a0a0a, inset -2px -2px #dfdfdf, inset 2px 2px grey;
-        }
-
-        .status-bar {
-            background: #c0c0c0;
-            border-top: 1px solid #808080;
-            padding: 2px 8px;
-            font-size: 11px;
-            display: flex;
-            justify-content: space-between;
-        }
-
-        .menu-bar {
-            background: #c0c0c0;
-            padding: 2px;
-            border-bottom: 1px solid #808080;
-        }
-
-        .menu-item {
-            display: inline-block;
-            padding: 4px 8px;
-            cursor: pointer;
-        }
-
-        .menu-item:hover {
-            background: #0078d4;
-            color: white;
-        }
-    </style>
-</head>
+    <!-- Link to external CSS file -->
+    <link rel="stylesheet" href="style.css">
+<style>
+    body {
+        width: 100vw;
+        height: 100vh;
+    }
+    
+    .window {
+        width: calc(100% - 6px);
+        height: calc(100% - 6px);
+        display: block;
+        box-sizing: border-box;
+        max-width: none;
+    }
+    
+    .window-body {
+        height: calc(100% - 60px); /* Adjust based on title bar + menu bar height */
+        display: flex;
+        flex-direction: column;
+    }
+    
+    .content-area {
+        flex: 1; /* This makes it fill all available space */
+        margin: 5px; /* Fixed margin from window-body edges */
+        overflow: auto; /* Add scrollbar if content is too long */
+    }
+    
+    /* Keep the yawning face image sized correctly */
+    #imagestyle img {
+        width: auto;
+        height: auto;
+        max-width: none; /* or whatever size you want */
+    }
+</style></head>
 <body>
     <div class="window">
         <div class="title-bar">

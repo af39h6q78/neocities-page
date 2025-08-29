@@ -56,7 +56,8 @@ input[type="range"]::-webkit-slider-thumb {
   -webkit-appearance: none;
   height: 21px;
   width: 11px;
-  background: svg-load("https://raw.githubusercontent.com/jdan/98.css/main/icon/indicator-horizontal.svg");
+    background: url("https://raw.githubusercontent.com/jdan/98.css/main/icon/indicator-horizontal.svg") no-repeat center;
+    background-size: contain;
   transform: translateY(-8px);
   box-shadow: none;
   border: none;
@@ -99,6 +100,7 @@ input[type="range"]::-webkit-slider-runnable-track {
   border-bottom: 1px solid grey;
   box-shadow: 1px 0 0 white, 1px 1px 0 white, 0 1px 0 white, -1px 0 0 darkgrey,
     -1px -1px 0 darkgrey, 0 -1px 0 darkgrey, -1px 1px 0 white, 1px -1px darkgrey;
+    
 }
  
 input[type="range"]::-moz-range-track {
@@ -110,6 +112,71 @@ input[type="range"]::-moz-range-track {
   border-bottom: 1px solid grey;
   box-shadow: 1px 0 0 white, 1px 1px 0 white, 0 1px 0 white, -1px 0 0 darkgrey,
     -1px -1px 0 darkgrey, 0 -1px 0 darkgrey, -1px 1px 0 white, 1px -1px darkgrey;
+}
+
+/* Volume slider styles */
+.is-vertical {
+  display: inline-block;
+  width: 4px;
+  height: 80px;
+  transform: translateY(50%);
+}
+
+.is-vertical > input[type="range"] {
+  width: 80px;
+  height: 4px;
+  margin: 0 calc(8px + 10px) 0 10px;
+  transform-origin: left;
+  transform: rotate(270deg) translateX(calc(-50% + 8px));
+}
+
+.is-vertical > input[type="range"]::-webkit-slider-runnable-track {
+  border-left: 1px solid grey;
+  border-right: 0;
+  border-bottom: 1px solid grey;
+  box-shadow: -1px 0 0 white, -1px 1px 0 white, 0 1px 0 white, 1px 0 0 darkgrey,
+    1px -1px 0 darkgrey, 0 -1px 0 darkgrey, 1px 1px 0 white, -1px -1px darkgrey;
+    margin-right: 4px;
+}
+
+.is-vertical > input[type="range"]::-moz-range-track {
+  border-left: 1px solid grey;
+  border-right: 0;
+  border-bottom: 1px solid grey;
+  box-shadow: -1px 0 0 white, -1px 1px 0 white, 0 1px 0 white, 1px 0 0 darkgrey,
+    1px -1px 0 darkgrey, 0 -1px 0 darkgrey, 1px 1px 0 white, -1px -1px darkgrey;
+}
+
+.is-vertical > input[type="range"]::-webkit-slider-thumb {
+  transform: translateY(-8px) scaleX(-1);
+}
+
+.is-vertical > input[type="range"].has-box-indicator::-webkit-slider-thumb {
+  transform: translateY(-10px) scaleX(-1);
+}
+
+.is-vertical > input[type="range"]::-moz-range-thumb {
+  transform: translateY(2px) scaleX(-1);
+}
+
+.is-vertical > input[type="range"].has-box-indicator::-moz-range-thumb {
+  transform: translateY(0px) scaleX(-1);
+}
+
+.volume-icon {
+  width: 16px;
+  height: 16px;
+  margin-bottom: 5px;
+}
+
+.field-row {
+  display: flex;
+  align-items: center;
+  margin-left: 8px;
+}
+
+.field-row > * + * {
+  margin-left: 6px;
 }
  
 button,input,label,option,select,table,textarea,ul.tree-view{-webkit-font-smoothing:none;font-family:"Pixelated MS Sans Serif",Arial;font-size:11px}h1{font-size:5rem}h2{font-size:2.5rem}h3{font-size:2rem}h4{font-size:1.5rem}u{border-bottom:.5px solid #222;text-decoration:none}button,input[type=reset],input[type=submit]{border:none;border-radius:0;box-sizing:border-box;color:transparent;min-height:23px;min-width:75px;padding:0 12px;text-shadow:0 0 #222}.vertical-bar,button,input[type=reset],input[type=submit]{background:silver;box-shadow:inset -1px -1px #0a0a0a,inset 1px 1px #fff,inset -2px -2px grey,inset 2px 2px #dfdfdf}.vertical-bar{height:20px;width:4px}button:not(:disabled):active,input[type=reset]:not(:disabled):active,input[type=submit]:not(:disabled):active{box-shadow:inset -1px -1px #fff,inset 1px 1px #0a0a0a,inset -2px -2px #dfdfdf,inset 2px 2px grey;text-shadow:1px 1px #222}@media (not(hover)){button:not(:disabled):hover,input[type=reset]:not(:disabled):hover,input[type=submit]:not(:disabled):hover{box-shadow:inset -1px -1px #fff,inset 1px 1px #0a0a0a,inset -2px -2px #dfdfdf,inset 2px 2px grey}}button:focus,input[type=reset]:focus,input[type=submit]:focus{outline:1px dotted #000;outline-offset:-4px}button::-moz-focus-inner,input[type=reset]::-moz-focus-inner,input[type=submit]::-moz-focus-inner{border:0}:disabled,:disabled+label,input[readonly],input[readonly]+label{color:grey}:disabled+label,button:disabled,input[type=reset]:disabled,input[type=submit]:disabled{text-shadow:1px 1px 0 #fff}
@@ -158,7 +225,7 @@ button,input,label,option,select,table,textarea,ul.tree-view{-webkit-font-smooth
     inset 2px 2px #ffffff;
   background: #c0c0c0;
   padding: 3px;
-  width:260px;
+  width:300px;
 }
  
 .title-bar {
@@ -228,7 +295,6 @@ input[type=range] {
     input[type=range]::-webkit-slider-runnable-track {
         width: 100%;
         height: 2px; /* thickness of seeking track */
-        cursor: help;
     }
  
  
@@ -236,7 +302,6 @@ input[type=range] {
     input[type=range]::-moz-range-track {
         width: 100%;
         height: 2px; /* thickness of seeking track */
-        cursor: help;
     }
  
     .flex {display: flex;}
@@ -328,6 +393,27 @@ input[type=range] {
     height:15px;
     width:15px;
     }
+
+    /* Chrome / WebKit */
+    .is-vertical > #volume-slider::-webkit-slider-thumb {
+    background: url("https://files.catbox.moe/o5mhmz.svg") no-repeat center;
+    background-size: contain;
+    height: 21px; /* adjust as needed */
+    width: 11px;  /* adjust as needed */
+    border: none;
+    box-shadow: none;
+    
+    }
+
+    /* Firefox */
+    .is-vertical > #volume-slider::-moz-range-thumb {
+    background: url("https://files.catbox.moe/o5mhmz.svg") no-repeat center;
+    background-size: contain;
+    height: 21px;
+    width: 11px; 
+    border: none;
+    border-radius: 0;
+    }
 </style>
 </head>
 <body>
@@ -373,6 +459,13 @@ input[type=range] {
  
         <audio id="music" src=""></audio> 
     </div>
+    
+    <!-- Volume Control -->
+    <div class="field-row">
+        <div class="is-vertical">
+            <input id="volume-slider" class="has-box-indicator" type="range" min="0" max="100" step="1" value="30" onchange="changeVolume()" />
+        </div>
+    </div>
     </div>
   </div>
 </div>
@@ -390,6 +483,7 @@ input[type=range] {
         let seek_slider = document.querySelector(".seek_slider");
         let curr_time = document.querySelector(".current-time");
         let total_duration = document.querySelector(".total-duration");
+        let volume_slider = document.querySelector("#volume-slider");
  
         let track_index = 0;
         let isPlaying = false;
@@ -460,12 +554,12 @@ input[type=range] {
             },
             
             {
-                name:"Life Of The Party (with André 3000)",
+                name:"Life Of The Party (with AndrÃ© 3000)",
                 path:"https://files.catbox.moe/7ytru8.mp3"
             },
             
             {
-                name:"Поэзия фольги",
+                name:"ÐŸÐ¾ÑÐ·Ð¸Ñ Ñ„Ð¾Ð»ÑŒÐ³Ð¸",
                 path:"https://files.catbox.moe/7jq2vs.mp3"
             },
             
@@ -510,6 +604,14 @@ input[type=range] {
         //
         //
         //
+
+        // Volume control function
+        function changeVolume() {
+            curr_track.volume = volume_slider.value / 100;
+        }
+
+        // Set initial volume
+        curr_track.volume = 0.5;
  
         function loadTrack(track_index) {
             clearInterval(updateTimer);

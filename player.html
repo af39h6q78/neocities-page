@@ -32,6 +32,7 @@
         border-width: 1px 0px 0px 1px;
         margin-left:auto;
         margin-right:auto;
+        position: relative;
     }
  
     .controlimg:hover {
@@ -226,6 +227,7 @@ button,input,label,option,select,table,textarea,ul.tree-view{-webkit-font-smooth
   background: #c0c0c0;
   padding: 3px;
   width:300px;
+  overflow: visible;
 }
  
 .title-bar {
@@ -277,7 +279,7 @@ background-position:top 3px left 4px;
 background-repeat:no-repeat;
 margin-left:2px}
  
-.window-body { margin:0px; height:98px; }
+.window-body { margin:0px; height:98px; overflow: visible; }
  
  
  
@@ -310,14 +312,17 @@ input[type=range] {
  
  
     .songtitlewindow {
+        position: relative;
         background-color:#fff;
         box-shadow:inset -1px -1px #fff,inset 1px 1px grey,inset -2px -2px #dfdfdf,inset 2px 2px #0a0a0a;
+        overflow: visible;
     }
  
     #musicplayer {
         border:2px solid silver; /* border around player */
         border-width: 2px 0px 0px 0px;
         width:160px; /* width of the player */
+        position: relative;
     }
  
     #imagestyle {
@@ -349,12 +354,81 @@ input[type=range] {
         left:-2px;
         border:0px solid transparent;
         border-width:0px 0px 0px 0px;
+        cursor: pointer;
+    }
+    
+    .tracklist-dropdown {
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        background: #c0c0c0;
+        border: 2px solid;
+        border-color: #dfdfdf #0a0a0a #0a0a0a #dfdfdf;
+        width: auto;
+        max-height: 0;
+        overflow: hidden;
+        opacity: 0;
+        visibility: hidden;
+        box-shadow: inset -1px -1px #0a0a0a,
+            inset 1px 1px #dfdfdf, inset -2px -2px #808080,
+            inset 2px 2px #ffffff;
+        z-index: 9999;
+        font-family: "Pixelated MS Sans Serif", Arial;
+        font-size: 11px;
+        transition: max-height 0.4s ease-out, opacity 0.2s ease, visibility 0.2s ease;
+        margin-top: 0;
+        display: block;
+        box-sizing: border-box;
+    }
+    
+    .tracklist-dropdown.active {
+        max-height: 400px;
+        opacity: 1;
+        visibility: visible;
+    }
+    
+    .tracklist-content {
+        padding: 6px;
+        overflow-y: auto;
+        max-height: 350px; /* you can play around with this if you want it to be taller or shorter */
+        background: white;
+        box-shadow:inset -1px -1px #fff,inset 1px 1px grey,inset -2px -2px #dfdfdf,inset 2px 2px #0a0a0a;
+        scrollbar-width: none; /* Firefox */
+        -ms-overflow-style: none; /* IE 10+ */
+    }
+    .tracklist-content::-webkit-scrollbar {
+        width: 0;
+        height: 0;
+    }
+    
+    .tracklist-item {
+        padding: 4px 8px;
+        border-bottom: 1px solid #c0c0c0;
+        cursor: pointer;
+        user-select: none;
+    }
+    
+    .tracklist-item:hover {
+        background: blue;
+        color: white;
+    }
+    
+    .tracklist-item.current {
+        background: #0a0a0a;
+        color: white;
+        font-weight: bold;
     }
  
     .songtitle {
         padding:5px; /* padding around song title */
         border-bottom:0px; /* border under song title */
         display:block;
+        flex: 1;
+        min-width: 0;
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
         font-family:Pixelated MS Sans Serif;
     }
  
@@ -433,9 +507,12 @@ input[type=range] {
     <div id="musicplayer">
         <div class="songtitlewindow">
             <div class="flex"><marquee scrollamount="4" class="songtitle"></marquee><div class="songtitlearrow"></div></div>
+            <div class="tracklist-dropdown" id="tracklistDropdown">
+                <div class="tracklist-content" id="tracklistContent"></div>
+            </div>
         </div>
  
- <div class="seeking">
+        <div class="seeking">
             <div class="current-time">00:00</div>
  
             <input type="range" min="1" max="100" value="0" class="seek_slider" onchange="seekTo()">
@@ -499,8 +576,8 @@ input[type=range] {
         // CATBOX.MOE IS RECOMMENDED FOR UPLOADING MP3 FILES
         let track_list = [
             {
-                name:"Saran Pack",
-                path:"https://files.catbox.moe/n8nz8w.mp3"
+                name:"New Body UNRELEASED",
+                path:"https://files.catbox.moe/nkc97x.mp3"
             },
 
             {
@@ -508,46 +585,6 @@ input[type=range] {
                 path:"https://files.catbox.moe/h1ps28.mp3"
             },
 
-            {
-                name:"pissy pamper x walking on a dream",
-                path:"https://files.catbox.moe/oojo0w.m4a"
-            },
-            
-            {
-                name:"The Race",
-                path:"https://files.catbox.moe/965mmg.mp3"
-            },
-
-            {
-                name:"blue bands blue bands blue baaaaaaaaaands",
-                path:"https://files.catbox.moe/jplh5q.mp3"
-            },
-            
-            {
-                name:"New Body UNRELEASED",
-                path:"https://files.catbox.moe/nkc97x.mp3"
-            },
-
-            {
-                name:"Oh Ok - release the files",
-                path:"https://files.catbox.moe/cguqjf.mp3"
-            },
-            
-            {
-                name:"New Choppa",
-                path:"https://files.catbox.moe/052132.mp3"
-            },
-
-            {
-                name:"FUK SUMN",
-                path:"https://files.catbox.moe/k1atwm.mp3"
-            },
-            
-            {
-                name:"NO STYLIST",
-                path:"https://files.catbox.moe/x3m96l.mp3"
-            },
-            
             {
                 name:"Devil In A New Dress",
                 path:"https://files.catbox.moe/6bdume.mp3"
@@ -557,53 +594,11 @@ input[type=range] {
                 name:"Life Of The Party (with AndrÃ© 3000)",
                 path:"https://files.catbox.moe/7ytru8.mp3"
             },
-            
-            {
-                name:"ÐŸÐ¾ÑÐ·Ð¸Ñ Ñ„Ð¾Ð»ÑŒÐ³Ð¸",
-                path:"https://files.catbox.moe/7jq2vs.mp3"
-            },
-            
-            {
-                name:"Scam Brothers",
-                path:"https://files.catbox.moe/409357.mp3"
-            },
-            
-            {
-                name:"RIP",
-                path:"https://files.catbox.moe/3tsod1.mp3"
-            },
-            
-            {
-                name:"Dark Thoughts",
-                path:"https://files.catbox.moe/xtx569.mp3"
-            },
-            
-            {
-                name:"EVIL CONCLUSION",
-                path:"https://files.catbox.moe/eu3qgb.mp3"
-            },
-            
-            {
-                name:"Mangolia",
-                path:"https://files.catbox.moe/5mj5mo.mp3"
-            },
-            
-            {
-                name:"u mad!",
-                path:"https://files.catbox.moe/fl8llc.mp3"
-            },
-                        
             {
                 name:"Bound 2",
                 path:"https://files.catbox.moe/es3a73.mp3"
             }
-
         ];
-        //
-        //
-        //
-        //
-        //
 
         // Volume control function
         function changeVolume() {
@@ -713,4 +708,60 @@ input[type=range] {
  
         // load the first track in the tracklist
         loadTrack(track_index);
+        
+        // Tracklist dropdown functionality
+        const songtitlearrow = document.querySelector(".songtitlearrow");
+        const tracklistDropdown = document.getElementById("tracklistDropdown");
+        const tracklistContent = document.getElementById("tracklistContent");
+        const arrowDefaultUrl = "https://files.catbox.moe/f5e8np.png";
+        const arrowActiveUrl = "https://files.catbox.moe/z9nwhb.svg";
+        let isTracklistOpen = false;
+        
+        function updateArrowIcon(open) {
+            songtitlearrow.style.backgroundImage = open ? `url('${arrowActiveUrl}')` : `url('${arrowDefaultUrl}')`;
+        }
+        
+        // Function to build tracklist
+        function buildTracklist() {
+            tracklistContent.innerHTML = "";
+            track_list.forEach((track, index) => {
+                const item = document.createElement("div");
+                item.className = "tracklist-item";
+                if (index === track_index) {
+                    item.classList.add("current");
+                }
+                item.textContent = (index + 1) + ". " + track.name;
+                item.onclick = () => {
+                    track_index = index;
+                    loadTrack(track_index);
+                    playTrack();
+                    toggleTracklist();
+                };
+                tracklistContent.appendChild(item);
+            });
+        }
+        
+        // Function to toggle tracklist
+        function toggleTracklist() {
+            isTracklistOpen = !isTracklistOpen;
+            if (isTracklistOpen) {
+                buildTracklist();
+                tracklistDropdown.classList.add("active");
+                window.parent.postMessage({ type: 'tracklist', action: 'open' }, '*');
+            } else {
+                tracklistDropdown.classList.remove("active");
+                window.parent.postMessage({ type: 'tracklist', action: 'close' }, '*');
+            }
+            updateArrowIcon(isTracklistOpen);
+        }
+        
+        // Event listener for arrow click
+        songtitlearrow.addEventListener("click", toggleTracklist);
+        
+        // Close tracklist when clicking outside
+        document.addEventListener("click", (e) => {
+            if (isTracklistOpen && !tracklistDropdown.contains(e.target) && !songtitlearrow.contains(e.target)) {
+                toggleTracklist();
+            }
+        });
     </script>
